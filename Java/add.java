@@ -43,8 +43,8 @@ public class add extends HttpServlet{
 		connection();
 		query="INSERT INTO SERVICEPLACE(place,service) VALUES(?,?)";
 		smt=con.prepareStatement(query);
-		smt.setString(1, service);
-		smt.setString(2, place); 
+		smt.setString(1, place);
+		smt.setString(2, service); 
 		int cnt = smt.executeUpdate();
         if(cnt==0) {
             
@@ -56,7 +56,7 @@ public class add extends HttpServlet{
         else {
            
             out.print("<form action=\"Admin.jsp\" method=\"post\"><h1><center>Go Back</center>");
-            out.print("</h1><center>Successfuly Addedu !!!<table><tr><td><input type=\"submit\" value=\"__\"></td>");
+            out.print("</h1><center>Successfuly Added !!!<table><tr><td><input type=\"submit\" value=\"__\"></td>");
             out.print("</tr></center></table></form>");
         }
 	    }

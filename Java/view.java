@@ -13,11 +13,7 @@ import java.util.*;
 
 public class view extends HttpServlet{
     static Connection con;
-    static String date=null;
-    static String service=null;
-    static String place;
-    static String uname=null;
-    static String status;
+    static String id;
     public static void connection()  {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -30,32 +26,33 @@ public class view extends HttpServlet{
   protected void doGet(HttpServletRequest req,HttpServletResponse res)throws ServletException , IOException{
     
             
-            try{connection();
-                Statement smt=con.createStatement();
+            try{
+            connection();
+            Statement smt=con.createStatement();
             res.setContentType("text/html");
             PrintWriter out = res.getWriter();   
+            HttpSession s=req.getSession();
 			connection();
 			String query="select * from stab;";
 			ResultSet resultset=smt.executeQuery(query);
 			int j=0;
             out.print("<html><body><center><h2>Details</h2><TABLE border =\"4\" cellpadding =\"4\" cellspacing=\"4\"><TR>");
             out.print("<TH>Name</TH>");
-                out.print("<TH>Place Name</TH>");
-                out.print("<TH>Date</TH>");
-                out.print("<TH>service</TH>");
-                out.print("<TH>Status</TH>");
+            out.print("<TH>Place Name</TH>");
+            out.print("<TH>Date</TH>");
+            out.print("<TH>service</TH>");
+            out.print("<TH>Status</TH>");                
+            out.print("</TR>    ");
 			while(resultset.next()) {
 				j++;
-                out.print("<html><body><center><table>");
+                out.print("<TR> <TD> " +resultset.getString(2)+" </td>");
+                out.print(" <TD>" +resultset.getString(3) +"</td>");
+                out.print(" <TD> "+ resultset.getString(4)+" </td>");
+                out.print(" <TD> "+resultset.getString(5) +"</td>");
+                out.print(" <TD> "+ resultset.getString(6) +"</td>");
                 
-                out.print("</TR>    <TR>");
-                out.print(" <TD> " +resultset.getString(1)+" </td>");
-                out.print(" <TD>" +resultset.getString(2) +"</td>");
-                out.print(" <TD> "+ resultset.getString(3)+" </td>");
-                out.print(" <TD> "+resultset.getString(4) +"</td>");
-                out.print(" <TD> "+ resultset.getString(5) +"</td>");
-                out.print("</td> </TR></TABLE></center></BODY></HTML>");
             }
+            out.print("</td> </TR></TABLE></center></BODY></HTML>");
 			if(j==0) {
 				out.print("<html><body><center><h1>-----Invalid-----</h1></center></body></html>");
 			}

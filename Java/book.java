@@ -44,7 +44,7 @@ public class book extends HttpServlet{
 		String query,query1;
 		try{
 		connection();
-               // if(cnt1<5){
+        if(isalid(date)<5){
 		query="INSERT INTO  stab (name,place,date,service,status) VALUES(?,?,?,?,?)";
 		smt=con.prepareStatement(query);
 		smt.setString(1, name);
@@ -61,19 +61,39 @@ public class book extends HttpServlet{
            
             out.println("\n<h1>Successfully Booked</h1> ");
         }
-        // else{
-        //     out.print("<form action=\"User.jsp\" method=\"post\">");
-        //     out.print("</h1><center>Sorry, Exceeded the Booking for the day<table><tr><td><input type=\"submit\" value=\"Login\"></td>");
-        //     out.print("</tr></center></table></form>");
-        // }
+    }
+        else{
+            out.print("<form action=\"User.jsp\" method=\"post\">");
+            out.print("</h1><center><h2>Sorry, Exceeded the Booking for the day in the Given Date</h2><table><tr><td></td>");
+            out.print("</tr></center></table></form>");
+        }
     }
 		catch(Exception e){
 			System.out.println(e);
 		}
         out.print("<form action=\"User.jsp\" method=\"post\">");
-        out.print("</h1><center>To Main menu---||--||<table><tr><td><input type=\"submit\" value=\"Login\"></td>");
+        out.print("</h1><center>To Main menu---||--||<table><tr><td><input type=\"submit\" value=\"Back\"></td>");
         out.print("</tr></center></table></form>");
     }
+        static int isalid(String date) {
+            int j=0;
+            PreparedStatement smt=null;
+            try{
+                connection();
+                String query="SELECT date FROM stab WHERE date="+"?";
+                smt=con.prepareStatement(query);
+                smt.setString(1, date);
+                
+                ResultSet rs=smt.executeQuery();
+                while(rs.next()) {
+                    j++;
+                }
+            }
+            catch (Exception e) {
+                 System.out.println(e);
+             }
+            return j;
+            }
     
 }
    

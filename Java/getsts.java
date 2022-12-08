@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.rowset.serial.SerialException;
 import java.util.*;
 
-public class searchplaces extends HttpServlet{
+public class getsts extends HttpServlet{
     static Connection con=null;
     static String place;
+    static String name;
     public static void connection()  {
         try {
            Class.forName("com.mysql.cj.jdbc.Driver");
@@ -27,16 +28,18 @@ public class searchplaces extends HttpServlet{
     PreparedStatement smt=null;
     try{
     place=req.getParameter("place");
+    name=req.getParameter("name");
     res.setContentType("text/html");
     PrintWriter out = res.getWriter();   
     connection();
-    String query="SELECT DISTINCT service from serviceplace where place=?";
+    String query="SELECT status from stab where name=? AND place=?";
     smt=con.prepareStatement(query);
-    smt.setString(1, place);			
+    smt.setString(1, name);		
+    smt.setString(2, place);	
     ResultSet resultset=smt.executeQuery();
     int j=0;
-    out.print("<html><body><center><h2>Available Services Are</h2><TABLE border =\"4\" cellpadding =\"4\" cellspacing=\"4\"><TR>");
-    out.print("<TH>Service</TH></TR>");
+    out.print("<html><body><center><h2>Your Service Status</h2><TABLE border =\"4\" cellpadding =\"4\" cellspacing=\"4\"><TR>");
+    out.print("<TH>Status</TH></TR>");
     while(resultset.next()) {
         j=1;
         out.print("  <TR>");
@@ -44,7 +47,7 @@ public class searchplaces extends HttpServlet{
     }
     out.print("</td> </TR></TABLE></center></BODY></HTML>");
     if(j==0) {
-        out.print("<html><body><center><h3>-----Empty-----</h3></center></body></html>");
+        out.print("<html><body><center><h3>-----No DATA-----</h3></center></body></html>");
     }
     out.print("<form action=\"User.jsp\" method=\"post\"><h1><center>Go Back</center>");
     out.print("</h1><center>To Go Back to the Main Menu !!!<table><tr><td><input type=\"submit\" value=\"__\"></td>");

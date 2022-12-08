@@ -12,12 +12,10 @@ import javax.sql.rowset.serial.SerialException;
 import java.util.*;
 
 
-public class Alogin extends HttpServlet{
+public class stsup extends HttpServlet{
     
-	static String pass;
-	static String uname;
-    static String role;
-    static int id=0;
+	static String sts;
+    static String id;
 	
     static Connection con;
     public static void connection()  {
@@ -35,50 +33,37 @@ public class Alogin extends HttpServlet{
     protected void doPost(HttpServletRequest req,HttpServletResponse res)throws ServletException , IOException{
 
         res.setContentType("text/html");
-        HttpSession s=req.getSession();
 		PrintWriter out = res.getWriter();
-		pass=req.getParameter("password");
-        uname=req.getParameter("uname");
-        role=req.getParameter("role");
-        System.out.println(role);
+        HttpSession s=req.getSession();
+		sts=req.getParameter("sts");
+        id=req.getParameter("id");
+        System.out.println("id= "+id+" "+"sts= "+sts);
         PreparedStatement smt=null;
 		String query;
 		try{
 		connection();
-		query="SELECT id from atab Where user=? And pass=? AND role=?";
+		query="Update stab set status = ? where ID= ? ";
 		smt=con.prepareStatement(query);
-		smt.setString(1, uname);
-		smt.setString(2, pass);
-        smt.setString(3, role);
-        System.out.println(uname);
-        System.out.print(pass);  
-		int cnt = 0;
-        ResultSet rs=smt.executeQuery();
-        while(rs.next()){
-            cnt++;
-            id=rs.getInt(1);
-        }
-        s.setAttribute("ID",id);
-        System.out.println(id+" "+cnt);
+		smt.setString(1, (sts.equals("Accept"))?"Accepted":"Rejected");
+		smt.setString(2, id); 
+		int cnt = smt.executeUpdate();
         if(cnt==0) {
             
-            req.getRequestDispatcher("/error.jsp").forward(req, res);
+            out.print("<form action=\"Admin.jsp\" method=\"post\"><h1><center>Go Back</center>");
+            out.print("</h1><center>Error while Updating !!!<table><tr><td><input type=\"submit\" value=\"__\"></td>");
+            out.print("</tr></center></table></form>");
 
         }
         else {
            
-            if(role.equals("Admin")){
-                //res.sendRedirect("User.jsp");
-                req.getRequestDispatcher("/Admin.jsp").forward(req,res);
-            }
-            
-            else {
-                req.getRequestDispatcher("/User.jsp").forward(req,res);
-            }
+            out.print("<form action=\"Admin.jsp\" method=\"post\"><h1><center>Go Back</center>");
+            out.print("</h1><center>Successfuly Status Updated !!!<table><tr><td><input type=\"submit\" value=\"__\"></td>");
+            out.print("</tr></center></table></form>");
         }
 	    }
 		catch(Exception e){
 			System.out.println(e);
 		}
 }
+   
 }
