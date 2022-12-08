@@ -1,4 +1,20 @@
 <html>
+     <style>
+      input[type=button]{
+            cursor: pointer;
+      border: 10;
+      border-radius: 4px;
+      font-weight: 550;
+      margin: auto;
+      width: 70px;
+      padding: 6px 0;
+      box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+      transition: 0.4s;
+      color: rgb(104, 85, 224);
+      background-color: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(104, 85, 224, 1);
+}
+    </style>
     <title>User Menu</title>
     <body>
      <center> <h1>User Menu</h1>

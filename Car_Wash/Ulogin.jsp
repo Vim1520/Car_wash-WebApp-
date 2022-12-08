@@ -22,7 +22,8 @@ input[type=text], input[type=password] {
       <h1><center>User Login</center></h1><br>
       <table border="10px" align="center">
           <center>
-          <form name="loginForm" method="POST" action="Ulogin">
+          <form name="loginForm" method="POST" action="Alogin">
+            <input type="hidden" name="role" value="User">
              <tr> 
               <td><p>User name:
               </td>

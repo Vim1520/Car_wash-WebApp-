@@ -41,7 +41,7 @@
              </tr>
              <tr>
              <td> <p>Date: 
-             </td> <td><input type="text" name="date" value="enter in dd/mm/yyy"/></p></td>
+             </td> <td><input type="date" name="date" value="enter in dd/mm/yyy"/></p></td>
           </tr>
           <tr align="center">
               <td colspan="2">

@@ -8,6 +8,7 @@
       <table border="10px" border-color="red" align="center">
           <center>
           <form name="register" method="POST" action="newDet">
+            <input type="hidden" name="role" value="User">
              <tr> 
               <td><p>Name:
               </td>

@@ -23,6 +23,7 @@ input[type=text], input[type=password] {
       <table border="10px   " align="center">
           <center>
           <form name="AloginForm" method="POST" action="Alogin">
+            <input type="hidden" name="role" value="Admin">
              <tr> 
               <td><p>User name:
               </td>
@@ -36,10 +37,6 @@ input[type=text], input[type=password] {
           <tr>
               <td colspan="2">
               <p>  <input type="submit" value="Login"/></p></td>
-          </tr>
-          <tr align="center" >
-            <td>
-            <a href="register.jsp">Sign UP?</a></td>
           </tr>
           </form>       
       </center>
