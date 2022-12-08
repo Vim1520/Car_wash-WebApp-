@@ -20,8 +20,6 @@
 <servlet-name>view</servlet-name>
 <servlet-class>view</servlet-class>
 </servlet>
-
-
 <servlet-mapping>
 <servlet-name>view</servlet-name>
 <url-pattern>/view</url-pattern>
@@ -34,7 +32,26 @@
 <servlet-name>searchplaces</servlet-name>
 <servlet-class>searchplaces</servlet-class>
 </servlet>
+<servlet>
+<servlet-name>getsts</servlet-name>
+<servlet-class>getsts</servlet-class>
+</servlet>
 
+
+<servlet-mapping>
+<servlet-name>getsts</servlet-name>
+<url-pattern>/getsts</url-pattern>
+</servlet-mapping>
+<servlet>
+<servlet-name>stsup</servlet-name>
+<servlet-class>stsup</servlet-class>
+</servlet>
+
+
+<servlet-mapping>
+<servlet-name>stsup</servlet-name>
+<url-pattern>/stsup</url-pattern>
+</servlet-mapping>
 
 <servlet-mapping>
 <servlet-name>searchplaces</servlet-name>
